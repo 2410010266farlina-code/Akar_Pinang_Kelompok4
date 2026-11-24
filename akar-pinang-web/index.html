@@ -1,0 +1,420 @@
+
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#285c3d">
+<title>Akar Pinang — Tradisi Rasa, Kini Lebih Dekat</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+<div class="app-shell">
+
+<aside class="sidebar">
+    <a class="brand" href="#home">
+        <span class="brand-mark">❧</span>
+        <span>
+            <b>Akar Pinang</b>
+            <small>Tradisi Rasa, Kini Lebih Dekat</small>
+        </span>
+    </a>
+
+    <div class="side-label">MENU UTAMA</div>
+
+    <nav class="side-nav">
+        <button class="nav-item active" data-page="home"><span>⌂</span> Beranda</button>
+        <button class="nav-item" data-page="catalog"><span>▦</span> Katalog Produk</button>
+        <button class="nav-item" data-page="cart"><span>🛒</span> Keranjang <i id="cartCount">0</i></button>
+        <button class="nav-item" data-page="orders"><span>▤</span> Pesanan Saya</button>
+        <button class="nav-item" data-page="refund"><span>↶</span> Refund</button>
+        <button class="nav-item" data-page="wishlist"><span>♡</span> Wishlist</button>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <div class="help-card">
+            <span>✿</span>
+            <b>Butuh bantuan?</b>
+            <p>Kami siap membantu pesananmu.</p>
+            <button onclick="toast('Hubungi admin Akar Pinang melalui kontak toko.')">Hubungi kami ↗</button>
+        </div>
+
+        <button class="profile-mini" data-page="account">
+            <span class="avatar">AP</span>
+            <span><b>Pelanggan Akar Pinang</b><small>Member</small></span>
+            <span class="dots">···</span>
+        </button>
+    </div>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+    <button class="mobile-menu" id="mobileMenu">☰</button>
+    <div class="breadcrumb">Akar Pinang <span>/</span> <b id="crumb">Beranda</b></div>
+    <div class="top-actions">
+        <button class="icon-button" aria-label="Notifikasi" onclick="toast('Belum ada notifikasi baru.')">♧</button>
+        <button class="top-user" data-page="account">
+            <span class="avatar small">AP</span>
+            <span><b>Hai, Pelanggan!</b><small>Selamat datang kembali</small></span>⌄
+        </button>
+    </div>
+</header>
+
+<!-- BERANDA -->
+<section class="page active" id="page-home">
+    <div class="welcome-row">
+        <div>
+            <div class="eyebrow"><span></span> RASA NUSANTARA, PILIHAN KELUARGA</div>
+            <h1>Tradisi rasa,<br><em>kini lebih dekat.</em></h1>
+            <p class="muted">Temukan camilan akar pinang favoritmu, dibuat untuk menemani setiap cerita.</p>
+            <button class="primary" data-page="catalog">Jelajahi produk <span>→</span></button>
+        </div>
+
+        <div class="hero-art">
+            <div class="hero-circle"></div>
+            <img src="assets/product1.jpg" alt="Akar pinang renyah dalam mangkuk">
+            <span class="hero-sticker">Rasa asli<br><b>100%</b></span>
+            <div class="hero-caption"><span>✦</span> Camilan tradisional, rasa istimewa</div>
+        </div>
+    </div>
+
+    <div class="section-head">
+        <div>
+            <div class="eyebrow">PILIHAN UNTUKMU</div>
+            <h2>Favorit pelanggan</h2>
+        </div>
+        <button class="text-link" data-page="catalog">Lihat semua produk →</button>
+    </div>
+
+    <div class="product-grid" id="homeProducts"></div>
+
+    <div class="promo-strip">
+        <span class="promo-icon">✿</span>
+        <div>
+            <b>Lebih hemat, lebih nikmat</b>
+            <p>Nikmati pilihan paket untuk momen kebersamaan.</p>
+        </div>
+        <button class="light-button" data-page="catalog">Lihat paket →</button>
+    </div>
+</section>
+
+<!-- KATALOG -->
+<section class="page" id="page-catalog">
+    <div class="page-heading">
+        <div>
+            <div class="eyebrow">TEMUKAN CAMILAN FAVORIT</div>
+            <h1>Katalog Produk</h1>
+            <p class="muted">Renyahnya tradisi dalam setiap gigitan.</p>
+        </div>
+        <div class="search-wrap">⌕ <input id="search" placeholder="Cari camilan..." aria-label="Cari produk"></div>
+    </div>
+
+    <div class="catalog-tools">
+        <div class="chips">
+            <button class="chip active" data-category="Semua">Semua</button>
+            <button class="chip" data-category="Akar Pinang">Akar Pinang</button>
+            <button class="chip" data-category="Camilan Lain">Camilan Lain</button>
+        </div>
+
+        <select id="sort" aria-label="Urutkan produk">
+            <option value="popular">Paling populer</option>
+            <option value="low">Harga terendah</option>
+            <option value="high">Harga tertinggi</option>
+            <option value="rating">Rating tertinggi</option>
+        </select>
+    </div>
+
+    <div class="product-grid" id="catalogProducts"></div>
+</section>
+
+<!-- KERANJANG -->
+<section class="page" id="page-cart">
+    <div class="page-heading">
+        <div>
+            <div class="eyebrow">TINGGAL SELANGKAH LAGI</div>
+            <h1>Keranjang Belanja</h1>
+            <p class="muted">Pastikan pilihanmu sudah sesuai.</p>
+        </div>
+    </div>
+
+    <div class="cart-layout">
+        <div class="panel" id="cartItems"></div>
+
+        <div class="panel summary-panel">
+            <h3>Ringkasan belanja</h3>
+            <label class="field-label">Kode voucher</label>
+
+            <div class="voucher-row">
+                <input id="voucher" placeholder="Masukkan kode promo">
+                <button class="outline-button" id="applyVoucher">Pakai</button>
+            </div>
+
+            <div class="summary-line"><span>Subtotal</span><b id="subtotal">Rp0</b></div>
+            <div class="summary-line"><span>Estimasi ongkir</span><b id="shipping">Rp12.000</b></div>
+            <div class="summary-line discount-line"><span>Diskon</span><b id="discount">− Rp0</b></div>
+            <div class="summary-total"><span>Total</span><b id="total">Rp12.000</b></div>
+
+            <button class="primary full" id="checkoutBtn">Lanjut checkout <span>→</span></button>
+            <p class="secure-note">♧ Pembayaran aman dan mudah</p>
+        </div>
+    </div>
+</section>
+
+<!-- CHECKOUT -->
+<section class="page" id="page-checkout">
+    <div class="page-heading">
+        <div>
+            <div class="eyebrow">PROSES PEMESANAN</div>
+            <h1>Checkout</h1>
+            <p class="muted">Lengkapi detail pengiriman dan pembayaran.</p>
+        </div>
+    </div>
+
+    <div class="steps">
+        <span class="step active">1 <b>Alamat</b></span>
+        <i></i>
+        <span class="step active">2 <b>Pembayaran</b></span>
+        <i></i>
+        <span class="step">3 <b>Konfirmasi</b></span>
+    </div>
+
+    <form class="panel checkout-form" id="checkoutForm">
+        <h3>Alamat pengiriman</h3>
+
+        <div class="form-grid">
+            <label>
+                Nama penerima
+                <input required name="nama" type="text" placeholder="Nama lengkap penerima">
+            </label>
+
+            <label>
+                Nomor telepon
+                <input required name="telepon" type="tel" placeholder="08xxxxxxxxxx">
+            </label>
+
+            <label>
+                Provinsi
+                <input required name="provinsi" type="text" placeholder="Contoh: Kalimantan Selatan">
+            </label>
+
+            <label>
+                Kota/Kabupaten
+                <input required name="kota" type="text" placeholder="Contoh: Banjarmasin">
+            </label>
+
+            <label>
+                Kecamatan
+                <input required name="kecamatan" type="text" placeholder="Nama kecamatan">
+            </label>
+
+            <label>
+                Kode pos
+                <input required name="pos" type="text" inputmode="numeric" placeholder="Masukkan kode pos">
+            </label>
+
+            <label class="wide">
+                Alamat lengkap
+                <textarea required name="alamat" rows="3" placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan..."></textarea>
+            </label>
+        </div>
+
+        <h3>Jasa pengiriman</h3>
+
+        <div class="choice-row">
+            <label><input type="radio" name="ekspedisi" value="JNE" checked> JNE <small>Rp12.000</small></label>
+            <label><input type="radio" name="ekspedisi" value="SiCepat"> SiCepat <small>Rp13.000</small></label>
+            <label><input type="radio" name="ekspedisi" value="J&T Express"> J&amp;T Express <small>Rp14.000</small></label>
+        </div>
+
+        <h3>Metode pembayaran</h3>
+
+        <div class="payment-grid">
+            <label><input type="radio" name="payment" value="transfer_bank" checked> Transfer bank</label>
+            <label><input type="radio" name="payment" value="dana"> DANA</label>
+            <label><input type="radio" name="payment" value="ovo"> OVO</label>
+            <label><input type="radio" name="payment" value="gopay"> GoPay</label>
+            <label><input type="radio" name="payment" value="shopeepay"> ShopeePay</label>
+            <label><input type="radio" name="payment" value="cod"> COD</label>
+        </div>
+
+        <button class="primary" type="submit">Buat pesanan <span>→</span></button>
+        <p class="muted tiny">Pesanan dicatat dengan status pembayaran menunggu. Pembayaran belum diproses otomatis.</p>
+    </form>
+</section>
+
+<!-- PESANAN -->
+<section class="page" id="page-orders">
+    <div class="page-heading">
+        <div>
+            <div class="eyebrow">RIWAYAT TRANSAKSI</div>
+            <h1>Pesanan Saya</h1>
+            <p class="muted">Pantau pesanan dan status pengirimanmu.</p>
+        </div>
+    </div>
+    <div class="panel" id="ordersList"></div>
+</section>
+
+<!-- REFUND -->
+<section class="page" id="page-refund">
+    <div class="page-heading">
+        <div>
+            <div class="eyebrow">LAYANAN PELANGGAN</div>
+            <h1>Pengajuan Refund</h1>
+            <p class="muted">Ada kendala dengan pesanan? Kami siap membantu.</p>
+        </div>
+        <span class="refund-icon">↶</span>
+    </div>
+
+    <div class="refund-info">
+        <span>ⓘ</span>
+        <div>
+            <b>Sebelum mengajukan refund</b>
+            <p>Siapkan kode pesanan dan bukti foto jika ada. Pengajuan akan ditinjau oleh tim Akar Pinang.</p>
+        </div>
+    </div>
+
+    <div class="refund-layout">
+        <form class="panel checkout-form" id="refundForm">
+            <h3>Formulir refund</h3>
+
+            <label class="field-label">
+                Kode pesanan
+                <select required id="refundOrder">
+                    <option value="">Pilih pesanan</option>
+                </select>
+            </label>
+
+            <label class="field-label">
+                Alasan refund
+                <select required id="refundReason">
+                    <option value="">Pilih alasan</option>
+                    <option value="produk_rusak">Produk rusak</option>
+                    <option value="produk_salah">Produk yang diterima salah</option>
+                    <option value="tidak_sesuai">Produk tidak sesuai deskripsi</option>
+                    <option value="pesanan_tidak_sampai">Pesanan tidak sampai</option>
+                    <option value="lainnya">Alasan lainnya</option>
+                </select>
+            </label>
+
+            <label class="field-label">
+                Ceritakan kendalamu
+                <textarea id="refundDescription" rows="4" placeholder="Jelaskan kendala yang kamu alami..."></textarea>
+            </label>
+
+            <label class="field-label">
+                Bukti foto (opsional)
+                <input id="refundPhoto" type="file" accept="image/jpeg,image/png,image/webp">
+                <small class="muted">Format JPG, PNG atau WEBP.</small>
+            </label>
+
+            <h3>Pengembalian dana ke</h3>
+
+            <label class="field-label">
+                Metode refund
+                <select id="refundMethod" required>
+                    <option value="transfer_bank">Transfer bank</option>
+                    <option value="dana">DANA</option>
+                    <option value="ovo">OVO</option>
+                    <option value="gopay">GoPay</option>
+                    <option value="shopeepay">ShopeePay</option>
+                </select>
+            </label>
+
+            <div id="bankFields" class="form-grid">
+                <label>Nama bank<input id="bankName" placeholder="Contoh: BCA"></label>
+                <label>Nomor rekening / akun<input id="accountNumber" placeholder="Nomor tujuan"></label>
+                <label class="wide">Atas nama<input id="accountHolder" placeholder="Nama pemilik rekening"></label>
+            </div>
+
+            <button class="primary" type="submit">Kirim pengajuan refund <span>→</span></button>
+            <p class="muted tiny">Pengajuan refund mengikuti pemeriksaan dan ketentuan server.</p>
+        </form>
+
+        <div class="panel refund-history">
+            <h3>Riwayat refund</h3>
+            <p class="muted">Status pengajuanmu akan muncul di sini.</p>
+            <div id="refundList" class="empty-state">
+                <span>↶</span>
+                <b>Belum ada pengajuan</b>
+                <small>Riwayat refund akan tampil setelah pengajuan dibuat.</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WISHLIST -->
+<section class="page" id="page-wishlist">
+    <div class="page-heading">
+        <div>
+            <div class="eyebrow">SIMPAN UNTUK NANTI</div>
+            <h1>Wishlist</h1>
+            <p class="muted">Produk yang kamu sukai.</p>
+        </div>
+    </div>
+    <div class="product-grid" id="wishlistProducts"></div>
+</section>
+
+<!-- AKUN -->
+<section class="page" id="page-account">
+    <div class="page-heading">
+        <div>
+            <div class="eyebrow">RUANG PRIBADIMU</div>
+            <h1>Akun Saya</h1>
+            <p class="muted">Kelola informasi dan preferensimu.</p>
+        </div>
+    </div>
+
+    <div class="panel account-panel">
+        <span class="avatar large">AP</span>
+        <div>
+            <h2>Pelanggan Akar Pinang</h2>
+            <span class="member-tag">✦ Member</span>
+            <p class="muted">Selamat datang di keluarga Akar Pinang.</p>
+        </div>
+    </div>
+
+    <div class="account-links">
+        <button data-page="orders"><span>▤</span><b>Pesanan Saya</b><small>Lihat riwayat pembelian</small>→</button>
+        <button data-page="refund"><span>↶</span><b>Refund</b><small>Ajukan atau cek status refund</small>→</button>
+        <button data-page="wishlist"><span>♡</span><b>Wishlist</b><small>Produk favoritmu</small>→</button>
+        <button onclick="toast('Pengaturan akun akan tersedia pada versi terhubung database.')"><span>⚙</span><b>Pengaturan</b><small>Notifikasi dan bahasa</small>→</button>
+    </div>
+</section>
+
+<!-- DETAIL PRODUK -->
+<section class="page" id="page-detail">
+    <button class="text-link back-link" data-page="catalog">← Kembali ke katalog</button>
+    <div id="detailContent"></div>
+</section>
+
+<footer class="footer">
+    <span>❧ <b>Akar Pinang</b></span>
+    <span>Tradisi Rasa, Kini Lebih Dekat</span>
+    <span>© 2026 Akar Pinang</span>
+</footer>
+
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<nav class="mobile-nav">
+    <button data-page="home"><span>⌂</span>Home</button>
+    <button data-page="catalog"><span>▦</span>Katalog</button>
+    <button data-page="cart"><span>🛒</span>Keranjang</button>
+    <button data-page="orders"><span>▤</span>Pesanan</button>
+    <button data-page="account"><span>○</span>Akun</button>
+</nav>
+
+<script src="app.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>
